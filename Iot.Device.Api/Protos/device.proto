@@ -1,0 +1,32 @@
+syntax = "proto3";
+option csharp_namespace = "Iot.Device.Api";
+
+import "google/protobuf/empty.proto"; 
+
+package device_v1;
+ 
+service Device {
+   rpc CreateDevice (DeviceRequest) returns (DeviceDto);
+
+   rpc GetDevice (DeviceIdRequest) returns (DeviceDto);
+
+   rpc ListDevices (google.protobuf.Empty) returns (stream DevicesDto);
+}
+
+ message DeviceRequest {
+  string name = 1;
+  string protocol=2;
+ }
+
+ message DeviceIdRequest {
+  string deviceId = 1;
+}
+
+ message DeviceDto {
+  string deviceId = 1;
+  string name = 2;
+ }
+
+ message DevicesDto {
+  repeated DeviceDto devices = 1;
+}
